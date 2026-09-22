@@ -114,6 +114,13 @@ tr:hover td{background:rgba(255,255,255,.04)}
 .card .metrics{display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
 .metric .k{color:var(--muted);font-size:11px;text-transform:uppercase}
 .metric .v{font-weight:700;font-size:15px}
+.fform{display:flex;flex-direction:column;gap:14px}
+.fform label{font-size:13px;color:var(--muted);font-weight:600}
+.fform input,.fform select,.fform textarea{width:100%;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:11px 13px;border-radius:12px;font-size:14px;font-family:inherit}
+.fform textarea{min-height:90px;resize:vertical}
+.fform input:focus,.fform select:focus,.fform textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.15)}
+.fform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.fform .row2{grid-template-columns:1fr}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
 .filters input,.filters select{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:10px 12px;border-radius:14px;font-size:14px}
 .filters input{flex:1;min-width:200px}
@@ -344,8 +351,34 @@ submit = f"""
 <div class="hero" style="padding:40px 0 10px">
 <h1 style="font-size:32px">Add your startup</h1>
 <p>Get listed free. Verified startups get a badge, more traffic, and priority placement in the buy/sell marketplace.</p>
-<a class="btn btn-primary" style="margin-top:10px" href="{ESC(form_url)}" target="_blank" rel="noopener">Submit your startup →</a>
-<a class="btn" style="margin-top:10px" href="pricing.html">⭐ Get featured</a>
+<form class="fform prose" style="margin-top:20px" action="https://formsubmit.co/{ESC(CFG.get('contact_email',''))}" method="POST">
+<input type="hidden" name="_subject" value="New startup submission — HonestMRR"/>
+<input type="hidden" name="_captcha" value="false"/>
+<input type="hidden" name="_template" value="table"/>
+<input type="hidden" name="_next" value="{SITE_URL}/thanks.html"/>
+<label>Startup name *</label><input name="Startup name" required placeholder="Example: DemoApp"/>
+<div class="row2">
+<div><label>Website *</label><input name="Website" required placeholder="https://..."/></div>
+<div><label>City</label><input name="City" placeholder="Indore"/></div>
+</div>
+<label>Category *</label><select name="Category" required><option value="">Choose...</option><option>SaaS</option><option>Fintech</option><option>Marketing</option><option>Developer Tools</option><option>Artificial Intelligence</option><option>E-commerce</option><option>Health & Fitness</option><option>Social Media</option><option>Productivity</option><option>Customer Support</option><option>Other</option></select>
+<label>One-line description *</label><textarea name="Description" required placeholder="What does your startup do?"></textarea>
+<div class="row2">
+<div><label>Monthly revenue (USD) *</label><input name="Monthly revenue USD" type="number" required placeholder="2500"/></div>
+<div><label>Growth % (30 days)</label><input name="Growth pct" type="number" placeholder="12"/></div>
+</div>
+<div class="row2">
+<div><label>For sale?</label><select name="For sale"><option>No</option><option>Yes</option></select></div>
+<div><label>Asking price (USD)</label><input name="Asking price USD" type="number" placeholder="30000"/></div>
+</div>
+<label>Revenue proof link * (Google Drive/Dropbox screenshot link)</label><input name="Revenue proof link" required placeholder="https://drive.google.com/..."/>
+<div class="row2">
+<div><label>Founder email *</label><input name="Founder email" type="email" required placeholder="you@email.com"/></div>
+<div><label>X / Twitter handle</label><input name="X handle" placeholder="@..."/></div>
+</div>
+<button class="btn btn-primary" type="submit" style="margin-top:6px">Submit for review →</button>
+<p style="color:var(--muted);font-size:12px;margin-top:10px">Review within 7 days. Proof bhejne walon ko ✅ Founder Verified badge milta hai. <a href="pricing.html">⭐ Get featured</a></p>
+</form>
 </div>
 <div class="prose">
 <h2>How verification works</h2>
@@ -559,8 +592,19 @@ services = f"""
 """
 page("services.html", f"AI Agents, Websites & Chatbots by Shivkumar — {NAME}", "Hire the founder of HonestMRR: AI chatbots, modern business websites, AI agents and automation. 7-day delivery, fixed pricing, UPI or Wise.", services)
 
+
+# ---------- thanks page ----------
+thanks = f"""
+<div class="hero" style="padding:60px 0 30px">
+<h1 style="font-size:32px">🎉 Submission received!</h1>
+<p>Shukriya! Aapki listing review queue me hai — <strong>7 din ke andar</strong> email par jawab aayega. Revenue proof valid hua to ✅ Founder Verified badge ke saath live ho jayegi.</p>
+<div class="cta" style="margin-top:20px"><a class="btn btn-primary" href="index.html">Leaderboard dekhein</a><a class="btn" href="browse.html">Marketplace browse karein</a></div>
+</div>
+"""
+page("thanks.html", f"Submission received — {NAME}", "Thank you for submitting your startup to HonestMRR. Review within 7 days.", thanks)
+
 # ---------- sitemap / robots ----------
-urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "privacy.html", "terms.html", "services.html"] + [f"startup/{r['slug']}.html" for r in rows]
+urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "thanks.html", "privacy.html", "terms.html", "services.html"] + [f"startup/{r['slug']}.html" for r in rows]
 if SITE_URL:
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sm += "".join(f"  <url><loc>{SITE_URL}/{u}</loc></url>\n" for u in urls)

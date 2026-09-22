@@ -53,6 +53,13 @@ tr:hover td{background:rgba(255,255,255,.04)}
 .card .metrics{display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
 .metric .k{color:var(--muted);font-size:11px;text-transform:uppercase}
 .metric .v{font-weight:700;font-size:15px}
+.fform{display:flex;flex-direction:column;gap:14px}
+.fform label{font-size:13px;color:var(--muted);font-weight:600}
+.fform input,.fform select,.fform textarea{width:100%;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:11px 13px;border-radius:12px;font-size:14px;font-family:inherit}
+.fform textarea{min-height:90px;resize:vertical}
+.fform input:focus,.fform select:focus,.fform textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.15)}
+.fform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.fform .row2{grid-template-columns:1fr}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
 .filters input,.filters select{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:10px 12px;border-radius:14px;font-size:14px}
 .filters input{flex:1;min-width:200px}
