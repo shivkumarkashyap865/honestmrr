@@ -4,7 +4,9 @@ HonestMRR static site generator.
 Reads data/startups.csv + data/config.json -> writes complete site into site/
 No external dependencies. Run: python3 build.py
 """
-import csv, json, os, html, math
+import csv
+import datetime
+import re, json, os, html, math
 from datetime import date
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -15,13 +17,42 @@ OUT = os.path.join(ROOT, "site")
 with open(os.path.join(DATA, "config.json"), encoding="utf-8") as f:
     CFG = json.load(f)
 
+# Google-Form / Sheet header aliases -> internal field names
+ALIAS = {
+    "startup name": "name", "website": "website", "category": "category", "city": "city",
+    "one-line description": "description", "monthly revenue (usd)": "mrr_usd",
+    "growth % (last 30 days)": "growth_pct", "is your startup for sale?": "for_sale",
+    "asking price (usd)": "asking_price_usd", "revenue proof link": "source_url",
+    "revenue proof (stripe/razorpay dashboard link)": "source_url",
+    "founder email": "founder_email", "x / twitter handle": "x_handle",
+    "timestamp": "submitted_ts", "approved": "approved",
+}
+
+def _num(v):
+    return float(str(v).replace("$", "").replace(",", "").strip() or 0)
+
 rows = []
 with open(os.path.join(DATA, "startups.csv"), encoding="utf-8") as f:
-    for r in csv.DictReader(f):
+    for raw in csv.DictReader(f):
+        r = {}
+        for k, v in (raw or {}).items():
+            if k is None:
+                continue
+            r[ALIAS.get(k.strip().lower(), k.strip().lower())] = (v or "").strip()
+        # approval gate: if sheet has an "approved" column, publish only approved rows
+        if "approved" in r and r["approved"].lower() not in ("yes", "y", "true", "1", "approved"):
+            continue
+        if not r.get("name"):
+            continue
+        if not r.get("slug"):
+            r["slug"] = re.sub(r"[^a-z0-9]+", "-", r["name"].lower()).strip("-")
+        if not r.get("submitted_date"):
+            r["submitted_date"] = datetime.date.today().isoformat()
+        r.setdefault("verification", "")
         try:
-            r["mrr_usd"] = float(r.get("mrr_usd") or 0)
-            r["growth_pct"] = float(r.get("growth_pct") or 0)
-            r["asking_price_usd"] = float(r.get("asking_price_usd") or 0)
+            r["mrr_usd"] = _num(r.get("mrr_usd"))
+            r["growth_pct"] = _num(r.get("growth_pct"))
+            r["asking_price_usd"] = _num(r.get("asking_price_usd"))
         except ValueError:
             continue
         r["for_sale"] = (r.get("for_sale") or "").strip().lower() in ("yes", "true", "1", "y")
