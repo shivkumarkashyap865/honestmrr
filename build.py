@@ -603,6 +603,18 @@ thanks = f"""
 """
 page("thanks.html", f"Submission received — {NAME}", "Thank you for submitting your startup to HonestMRR. Review within 7 days.", thanks)
 
+# ---------- smart 404: auto-redirect to home ----------
+notfound = """
+<div class="container" style="text-align:center;padding:80px 20px;">
+<meta http-equiv="refresh" content="3;url=/honestmrr/">
+<h1 style="font-size:34px;">Page moved 🔄</h1>
+<p style="color:var(--muted);margin:14px 0 26px;">Taking you to the HonestMRR home in 3 seconds…</p>
+<a class="btn btn-primary" href="/honestmrr/">Go to home now →</a>
+</div>
+<script>setTimeout(function(){location.replace("/honestmrr/");},3000);</script>
+"""
+page("404.html", f"Page not found — {NAME}", "Redirecting you to HonestMRR home.", notfound)
+
 # ---------- sitemap / robots ----------
 urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "thanks.html", "privacy.html", "terms.html", "services.html"] + [f"startup/{r['slug']}.html" for r in rows]
 if SITE_URL:
