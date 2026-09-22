@@ -175,6 +175,7 @@ def page(path, title, desc, body, canonical=None):
 <a class="nl" href="{'../' if path.count('/') else ''}browse.html">Buy/Sell</a>
 <a class="nl" href="{'../' if path.count('/') else ''}stats.html">Stats</a>
 <a class="nl" href="{'../' if path.count('/') else ''}pricing.html">Sponsor</a>
+<a class="nl" href="{'../' if path.count('/') else ''}services.html">Services</a>
 <a class="nl" href="{'../' if path.count('/') else ''}about.html">About</a>
 <div class="spacer"></div>
 <a class="btn btn-primary" href="{'../' if path.count('/') else ''}submit.html">+ Add Startup</a>
@@ -524,8 +525,42 @@ terms = f"""
 """
 page("terms.html", f"Terms of Service — {NAME}", f"Terms of use for {NAME}: listings, sponsorship, marketplace and liability.", terms)
 
+
+# ---------- services page ----------
+services = f"""
+<div class="hero" style="padding:40px 0 10px">
+<h1 style="font-size:32px">Hire the founder: AI agents, websites & chatbots</h1>
+<p>This entire site — glassmorphism UI, 3D slider, auto-updating data pipeline, SEO — was built solo by Shivkumar Mallah. <strong>HonestMRR is itself the portfolio.</strong> Same quality, for your business.</p>
+</div>
+<div class="cards">
+<div class="card"><div class="top"><h3>🤖 AI Chatbot</h3><span class="badge b-ver">7-DAY DELIVERY</span></div>
+<div class="desc">WhatsApp + website chatbot jo aapke customers ke sawaalon ke jawab khud deta hai — lead capture, booking, support. Trained on your business data.</div>
+<div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹15,000</div></div></div></div>
+<div class="card"><div class="top"><h3>🌐 Business Website</h3><span class="badge b-ver">7-DAY DELIVERY</span></div>
+<div class="desc">Modern, fast, mobile-first website (isi site jaisi glassmorphism design). SEO-ready, payment buttons ke saath. Hosting setup included.</div>
+<div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹20,000</div></div></div></div>
+<div class="card"><div class="top"><h3>🧠 AI Agents & Automation</h3></div>
+<div class="desc">Custom AI agents: lead generation, email automation, data extraction, internal ops. Jo ghanton ka kaam hai wo minutes me.</div>
+<div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹35,000</div></div></div></div>
+<div class="card"><div class="top"><h3>🔧 Maintenance + SEO</h3></div>
+<div class="desc">Monthly care: updates, backups, speed, search-console monitoring, content tweaks. Aapki site hamesha zinda aur rank karti rahe.</div>
+<div class="metrics"><div class="metric"><div class="k">Monthly</div><div class="v rev">₹5,000</div></div></div></div>
+</div>
+<h2 class="sec">Kaise kaam hota hai</h2>
+<div class="prose">
+<ol>
+<li><strong>DM / email</strong> karo: {f'{ESC(CFG["contact_email"])}' if CFG.get('contact_email') else 'site ke About page se contact karo'} — requirement batao (10 min call)</li>
+<li><strong>Fixed quote</strong> milta hai 24 ghante me — koi hidden charge nahi</li>
+<li><strong>50% advance</strong> (UPI: {ESC(CFG.get('upi_id','')) or 'on request'}) → kaam shuru</li>
+<li><strong>Delivery + 50%</strong> — 7-14 din me live. 15 din ka free support saath me.</li>
+</ol>
+<p style="color:var(--muted);font-size:13px">International clients: USD invoices via Wise/PayPal, purpose code P1007. Portfolio = yahi website + HonestMRR data pipeline.</p>
+</div>
+"""
+page("services.html", f"AI Agents, Websites & Chatbots by Shivkumar — {NAME}", "Hire the founder of HonestMRR: AI chatbots, modern business websites, AI agents and automation. 7-day delivery, fixed pricing, UPI or Wise.", services)
+
 # ---------- sitemap / robots ----------
-urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "privacy.html", "terms.html"] + [f"startup/{r['slug']}.html" for r in rows]
+urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "privacy.html", "terms.html", "services.html"] + [f"startup/{r['slug']}.html" for r in rows]
 if SITE_URL:
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sm += "".join(f"  <url><loc>{SITE_URL}/{u}</loc></url>\n" for u in urls)
