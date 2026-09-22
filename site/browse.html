@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Buy and Sell SaaS Startups — HonestMRR</title>
 <meta name="description" content="Browse verified startups for acquisition. Filter by category, revenue, growth and asking price."/>
-<link rel="canonical" href="https://YOUR-USERNAME.github.io/honestmrr/browse.html"/>
+
+<link rel="canonical" href="https://honestmrr.surge.sh/browse.html"/>
 <meta property="og:title" content="Buy and Sell SaaS Startups — HonestMRR"/>
 <meta property="og:description" content="Browse verified startups for acquisition. Filter by category, revenue, growth and asking price."/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://YOUR-USERNAME.github.io/honestmrr/browse.html"/>
+<meta property="og:url" content="https://honestmrr.surge.sh/browse.html"/>
 <link rel="stylesheet" href="assets/style.css"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✅</text></svg>"/>
 </head>
@@ -19,6 +20,7 @@
 <a class="nl" href="index.html">Leaderboard</a>
 <a class="nl" href="browse.html">Buy/Sell</a>
 <a class="nl" href="stats.html">Stats</a>
+<a class="nl" href="pricing.html">Sponsor</a>
 <a class="nl" href="about.html">About</a>
 <div class="spacer"></div>
 <a class="btn btn-primary" href="submit.html">+ Add Startup</a>
@@ -27,15 +29,45 @@
 
 <div class="hero" style="padding:40px 0 10px">
 <h1 style="font-size:32px">Buy & sell profitable startups</h1>
-<p>12 startups · 3 for sale · revenue data from public filings and founder-verified submissions</p>
+<p>26 startups · 3 for sale · revenue data from public filings and founder-verified submissions</p>
 </div>
 <div class="filters">
 <input id="q" type="search" placeholder="Search startups..."/>
-<select id="cat"><option value="">All categories</option><option value="customer support">Customer Support</option><option value="developer tools">Developer Tools</option><option value="fintech">Fintech</option><option value="health &amp; fitness">Health &amp; Fitness</option><option value="marketing">Marketing</option><option value="productivity">Productivity</option><option value="saas">SaaS</option></select>
+<select id="cat"><option value="">All categories</option><option value="analytics">Analytics</option><option value="customer support">Customer Support</option><option value="data security">Data Security</option><option value="developer tools">Developer Tools</option><option value="e-commerce">E-commerce</option><option value="fintech">Fintech</option><option value="food delivery">Food Delivery</option><option value="hr tech">HR Tech</option><option value="health &amp; fitness">Health &amp; Fitness</option><option value="home services">Home Services</option><option value="legal tech">Legal Tech</option><option value="marketing">Marketing</option><option value="productivity">Productivity</option><option value="saas">SaaS</option><option value="sales">Sales</option><option value="social media">Social Media</option></select>
 <select id="sale"><option value="">All listings</option><option value="1">For sale only</option></select>
 <select id="sort"><option value="mrr">Sort: Revenue</option><option value="growth">Sort: Growth</option></select>
 </div>
-<div class="cards" id="grid"><div class="card item" data-name="zoho" data-cat="saas" data-sale="0" data-mrr="100000000.0" data-growth="15.0" id="saas">
+<div class="cards" id="grid"><div class="card item" data-name="zomato" data-cat="food delivery" data-sale="0" data-mrr="138000000.0" data-growth="25.0" id="food-delivery">
+<div class="top"><div><h3><a href="startup/zomato.html">Zomato</a></h3>
+<div class="cat">Food Delivery · Gurugram</div></div></div>
+<div class="desc">Food delivery, quick commerce (Blinkit) &amp; dining out. FY25 revenue ~Rs 16,585 Cr as per filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$138.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+25%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="phonepe" data-cat="fintech" data-sale="0" data-mrr="133000000.0" data-growth="20.0" id="fintech">
+<div class="top"><div><h3><a href="startup/phonepe.html">PhonePe</a></h3>
+<div class="cat">Fintech · Bengaluru</div></div></div>
+<div class="desc">India&#x27;s largest UPI payments app. FY24 revenue ~Rs 13,333 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$133.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+20%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="swiggy" data-cat="food delivery" data-sale="0" data-mrr="109000000.0" data-growth="15.0" id="food-delivery">
+<div class="top"><div><h3><a href="startup/swiggy.html">Swiggy</a></h3>
+<div class="cat">Food Delivery · Bengaluru</div></div></div>
+<div class="desc">Food delivery &amp; quick commerce platform. FY24 revenue ~Rs 13,046 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$109.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+15%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="zoho" data-cat="saas" data-sale="0" data-mrr="100000000.0" data-growth="15.0" id="saas">
 <div class="top"><div><h3><a href="startup/zoho.html">Zoho</a></h3>
 <div class="cat">SaaS · Chennai</div></div></div>
 <div class="desc">Bootstrapped suite of 55+ business apps (CRM, Mail, Books). Crossed $1B+ annual revenue, fully profitable without outside funding.</div>
@@ -62,6 +94,16 @@
 <div class="metrics">
 <div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$62.0M</div></div>
 <div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+5%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="meesho" data-cat="e-commerce" data-sale="0" data-mrr="43000000.0" data-growth="18.0" id="e-commerce">
+<div class="top"><div><h3><a href="startup/meesho.html">Meesho</a></h3>
+<div class="cat">E-commerce · Bengaluru</div></div></div>
+<div class="desc">Social commerce marketplace for value e-commerce. FY24 revenue ~Rs 5,194 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$43.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+18%</span></div></div>
 
 </div>
 <div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
@@ -95,6 +137,46 @@
 
 </div>
 <div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="groww" data-cat="fintech" data-sale="0" data-mrr="14000000.0" data-growth="22.0" id="fintech">
+<div class="top"><div><h3><a href="startup/groww.html">Groww</a></h3>
+<div class="cat">Fintech · Bengaluru</div></div></div>
+<div class="desc">Zero-brokerage investing platform (stocks, mutual funds). FY24 revenue ~Rs 1,683 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$14.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+22%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="druva" data-cat="data security" data-sale="0" data-mrr="12500000.0" data-growth="10.0" id="data-security">
+<div class="top"><div><h3><a href="startup/druva.html">Druva</a></h3>
+<div class="cat">Data Security · Pune</div></div></div>
+<div class="desc">Cloud data protection &amp; cyber resiliency platform. ~$150M ARR publicly reported (2023).</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$12.5M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+10%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="urban company" data-cat="home services" data-sale="0" data-mrr="11000000.0" data-growth="17.0" id="home-services">
+<div class="top"><div><h3><a href="startup/urban-company.html">Urban Company</a></h3>
+<div class="cat">Home Services · Gurugram</div></div></div>
+<div class="desc">On-demand home services marketplace. FY24 revenue ~Rs 1,345 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$11.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+17%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="sharechat" data-cat="social media" data-sale="0" data-mrr="11000000.0" data-growth="9.0" id="social-media">
+<div class="top"><div><h3><a href="startup/sharechat.html">ShareChat</a></h3>
+<div class="cat">Social Media · Bengaluru</div></div></div>
+<div class="desc">Vernacular social network for Bharat users. FY24 revenue ~Rs 1,318 Cr as per ROC filings.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$11.0M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+9%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
 </div><div class="card item" data-name="chargebee" data-cat="fintech" data-sale="0" data-mrr="8300000.0" data-growth="14.0" id="fintech">
 <div class="top"><div><h3><a href="startup/chargebee.html">Chargebee</a></h3>
 <div class="cat">Fintech · Chennai</div></div></div>
@@ -102,6 +184,16 @@
 <div class="metrics">
 <div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$8.3M</div></div>
 <div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+14%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="icertis" data-cat="legal tech" data-sale="0" data-mrr="8300000.0" data-growth="9.0" id="legal-tech">
+<div class="top"><div><h3><a href="startup/icertis.html">Icertis</a></h3>
+<div class="cat">Legal Tech · Pune</div></div></div>
+<div class="desc">AI contract lifecycle management (ICM) platform. ~$100M ARR publicly reported.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$8.3M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+9%</span></div></div>
 
 </div>
 <div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
@@ -125,6 +217,56 @@
 
 </div>
 <div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="mindtickle" data-cat="sales" data-sale="0" data-mrr="4200000.0" data-growth="11.0" id="sales">
+<div class="top"><div><h3><a href="startup/mindtickle.html">Mindtickle</a></h3>
+<div class="cat">Sales · Pune</div></div></div>
+<div class="desc">Sales readiness &amp; revenue enablement platform. ~$50M ARR publicly reported.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$4.2M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+11%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="whatfix" data-cat="saas" data-sale="0" data-mrr="4200000.0" data-growth="12.0" id="saas">
+<div class="top"><div><h3><a href="startup/whatfix.html">Whatfix</a></h3>
+<div class="cat">SaaS · Bengaluru</div></div></div>
+<div class="desc">Digital adoption platform for enterprise software. ~$50M ARR publicly reported.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$4.2M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+12%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="leadsquared" data-cat="marketing" data-sale="0" data-mrr="4200000.0" data-growth="10.0" id="marketing">
+<div class="top"><div><h3><a href="startup/leadsquared.html">LeadSquared</a></h3>
+<div class="cat">Marketing · Bengaluru</div></div></div>
+<div class="desc">Marketing automation &amp; sales execution CRM. ~$50M ARR publicly reported.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$4.2M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+10%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="darwinbox" data-cat="hr tech" data-sale="0" data-mrr="3300000.0" data-growth="14.0" id="hr-tech">
+<div class="top"><div><h3><a href="startup/darwinbox.html">Darwinbox</a></h3>
+<div class="cat">HR Tech · Hyderabad</div></div></div>
+<div class="desc">HR management suite used by 1000+ enterprises. ~$40M ARR publicly reported.</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$3.3M</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+14%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
+</div><div class="card item" data-name="plausible analytics" data-cat="analytics" data-sale="0" data-mrr="120000.0" data-growth="8.0" id="analytics">
+<div class="top"><div><h3><a href="startup/plausible.html">Plausible Analytics</a></h3>
+<div class="cat">Analytics · Remote (global)</div></div></div>
+<div class="desc">Privacy-friendly Google Analytics alternative. Revenue public on their open-startup dashboard (~$120k MRR).</div>
+<div class="metrics">
+<div class="metric"><div class="k">Revenue/mo</div><div class="v rev">$120.0k</div></div>
+<div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+8%</span></div></div>
+
+</div>
+<div><span class="badge b-pub" title="Numbers from public filings / press reports">📰 Public Report</span></div>
 </div><div class="card item" data-name="demoinvoice (remove me)" data-cat="fintech" data-sale="1" data-mrr="4200.0" data-growth="9.0" id="fintech">
 <div class="top"><div><h3><a href="startup/demo-invoice.html">DemoInvoice (REMOVE ME)</a></h3>
 <div class="cat">Fintech · Pune</div></div><span class="badge b-sale">FOR SALE</span></div>
@@ -134,7 +276,7 @@
 <div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+9%</span></div></div>
 <div class="metric"><div class="k">Asking</div><div class="v">$60.0k</div></div><div class="metric"><div class="k">Multiple</div><div class="v">1.2x</div></div>
 </div>
-<div><span class="badge b-ver" title="Founder submitted proof (payment dashboard, screenshots) and we reviewed it">✅ Founder Verified</span></div>
+<div><span class="badge b-demo">⚠️ DEMO</span></div>
 </div><div class="card item" data-name="demonotes (remove me)" data-cat="productivity" data-sale="1" data-mrr="1800.0" data-growth="22.0" id="productivity">
 <div class="top"><div><h3><a href="startup/demo-notes.html">DemoNotes (REMOVE ME)</a></h3>
 <div class="cat">Productivity · Delhi</div></div><span class="badge b-sale">FOR SALE</span></div>
@@ -144,7 +286,7 @@
 <div class="metric"><div class="k">Growth</div><div class="v"><span class="growth up">+22%</span></div></div>
 <div class="metric"><div class="k">Asking</div><div class="v">$35.0k</div></div><div class="metric"><div class="k">Multiple</div><div class="v">1.6x</div></div>
 </div>
-<div><span class="badge b-com" title="Self-reported by the community, not yet verified">👥 Community</span></div>
+<div><span class="badge b-demo">⚠️ DEMO</span></div>
 </div><div class="card item" data-name="demofit (remove me)" data-cat="health &amp; fitness" data-sale="1" data-mrr="950.0" data-growth="-4.0" id="health-&amp;-fitness">
 <div class="top"><div><h3><a href="startup/demo-fit.html">DemoFit (REMOVE ME)</a></h3>
 <div class="cat">Health &amp; Fitness · Mumbai</div></div><span class="badge b-sale">FOR SALE</span></div>
@@ -154,13 +296,14 @@
 <div class="metric"><div class="k">Growth</div><div class="v"><span class="growth down">-4%</span></div></div>
 <div class="metric"><div class="k">Asking</div><div class="v">$12.0k</div></div><div class="metric"><div class="k">Multiple</div><div class="v">1.1x</div></div>
 </div>
-<div><span class="badge b-ver" title="Founder submitted proof (payment dashboard, screenshots) and we reviewed it">✅ Founder Verified</span></div>
+<div><span class="badge b-demo">⚠️ DEMO</span></div>
 </div></div>
 <script src="assets/browse.js"></script>
 
 </main>
 <footer><div class="wrap">
-<div>© 2026 HonestMRR — The database of honest startup revenues.</div>
+<div>© 2026 HonestMRR — The database of honest startup revenues.<br/>HonestMRR is operated by Shivkumar Mallah (sole proprietor), Indore, Madhya Pradesh, India.</div>
+<div><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></div>
 <div>Revenue figures are approximate & from public reports unless marked verified. Not investment advice.</div>
 </div></footer>
 </body>

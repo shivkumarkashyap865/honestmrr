@@ -147,6 +147,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 @media(max-width:640px){.hero h1{font-size:30px}.table-scroll{overflow-x:auto}.s3d-wrap{height:340px}.s3card{width:255px;margin-left:-127px;padding:18px}.s3rev{font-size:26px}}
 """
 
+gsc_meta = f'<meta name="google-site-verification" content="{CFG["gsc_verification"]}"/>' if CFG.get("gsc_verification") else ""
+
 def page(path, title, desc, body, canonical=None):
     canon = canonical or (SITE_URL + "/" + path if SITE_URL else "")
     canon_tag = f'<link rel="canonical" href="{ESC(canon)}"/>' if canon else ""
@@ -157,6 +159,7 @@ def page(path, title, desc, body, canonical=None):
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>{ESC(title)}</title>
 <meta name="description" content="{ESC(desc)}"/>
+{gsc_meta}
 {canon_tag}
 <meta property="og:title" content="{ESC(title)}"/>
 <meta property="og:description" content="{ESC(desc)}"/>
@@ -171,6 +174,7 @@ def page(path, title, desc, body, canonical=None):
 <a class="nl" href="{'../' if path.count('/') else ''}index.html">Leaderboard</a>
 <a class="nl" href="{'../' if path.count('/') else ''}browse.html">Buy/Sell</a>
 <a class="nl" href="{'../' if path.count('/') else ''}stats.html">Stats</a>
+<a class="nl" href="{'../' if path.count('/') else ''}pricing.html">Sponsor</a>
 <a class="nl" href="{'../' if path.count('/') else ''}about.html">About</a>
 <div class="spacer"></div>
 <a class="btn btn-primary" href="{'../' if path.count('/') else ''}submit.html">+ Add Startup</a>
@@ -179,7 +183,8 @@ def page(path, title, desc, body, canonical=None):
 {body}
 </main>
 <footer><div class="wrap">
-<div>© {date.today().year} {ESC(NAME)} — The database of honest startup revenues.</div>
+<div>© {date.today().year} {ESC(NAME)} — The database of honest startup revenues.<br/>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}.{f" Contact: {ESC(CFG['contact_email'])}" if CFG.get('contact_email') else ""}</div>
+<div><a href="{'../' if path.count('/') else ''}privacy.html">Privacy Policy</a> · <a href="{'../' if path.count('/') else ''}terms.html">Terms of Service</a></div>
 <div>Revenue figures are approximate & from public reports unless marked verified. Not investment advice.</div>
 </div></footer>
 </body>
@@ -339,6 +344,7 @@ submit = f"""
 <h1 style="font-size:32px">Add your startup</h1>
 <p>Get listed free. Verified startups get a badge, more traffic, and priority placement in the buy/sell marketplace.</p>
 <a class="btn btn-primary" style="margin-top:10px" href="{ESC(form_url)}" target="_blank" rel="noopener">Submit your startup →</a>
+<a class="btn" style="margin-top:10px" href="pricing.html">⭐ Get featured</a>
 </div>
 <div class="prose">
 <h2>How verification works</h2>
@@ -376,6 +382,8 @@ about = f"""
 </ol>
 <h2>For buyers & sellers</h2>
 <p>The Buy/Sell section lists profitable startups for acquisition. Sellers get exposure to thousands of visitors; buyers get numbers they can trust. {len(for_sale)} startups currently listed.</p>
+<h2>Operator</h2>
+<p>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))}, a sole proprietor based in {ESC(CFG.get('owner_location',''))}. The business sells advertising and sponsorship placements on this website along with featured-listing services.</p>
 <h2>Contact</h2>
 <p>{('Email: ' + ESC(CFG['contact_email'])) if CFG.get('contact_email') else 'Contact details coming soon. Follow us on X.'}</p>
 </div>
@@ -427,8 +435,97 @@ for r in rows:
 """
     page(f"startup/{slug}.html", f"{r['name']} Revenue & MRR — {NAME}", f"{r['name']}{city_part} makes approximately {fmt_usd(r['mrr_usd'])}/month. See verified revenue, growth and details on {NAME}.", body)
 
+
+# ---------- pricing / payments ----------
+upi = (CFG.get("upi_id") or "").strip()
+rzp = (CFG.get("razorpay_link") or "").strip()
+ppm = (CFG.get("paypal_link") or "").strip()
+wise = (CFG.get("wise_link") or "").strip()
+pay_btns = []
+if upi:
+    pay_btns.append(f'<a class="btn btn-primary" href="upi://pay?pa={ESC(upi)}&pn={ESC(NAME)}&cu=INR">📱 Pay via UPI (India)</a>')
+if rzp:
+    pay_btns.append(f'<a class="btn" href="{ESC(rzp)}" target="_blank" rel="noopener">💳 Card / NetBanking / Intl (Razorpay)</a>')
+if ppm:
+    pay_btns.append(f'<a class="btn" href="{ESC(ppm)}" target="_blank" rel="noopener">🌍 PayPal (International)</a>')
+if wise:
+    pay_btns.append(f'<a class="btn" href="{ESC(wise)}" target="_blank" rel="noopener">🏦 Wise bank transfer (International)</a>')
+pay_html = " ".join(pay_btns) if pay_btns else '<div class="note">Payment links setup me hai. Tab tak <a href="submit.html">submit page</a> se contact karein.</div>'
+qr_html = ""
+if upi:
+    qr_html = f"""<div style="text-align:center;margin:18px 0">
+<canvas id="upiqr" style="border-radius:16px;background:#fff;padding:12px"></canvas>
+<div class="cat" style="margin-top:8px">UPI ID: <strong>{ESC(upi)}</strong> (scan karein ya copy karein)</div>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script>if(window.QRious){{new QRious({{element:document.getElementById('upiqr'),value:'upi://pay?pa={ESC(upi)}&pn={ESC(NAME)}&cu=INR',size:190,background:'#ffffff',foreground:'#1a120b'}});}}</script>
+</div>"""
+
+pricing = f"""
+<div class="hero" style="padding:40px 0 10px">
+<h1 style="font-size:32px">Sponsor & get featured</h1>
+<p>Support the open startup database — aur hazards of verified-revenue visitors ke saamne apna product ya startup rakho.</p>
+</div>
+<div class="cards">
+<div class="card"><div class="top"><h3>🏠 Homepage sponsor slot</h3><span class="badge b-sale">BEST VALUE</span></div>
+<div class="desc">Logo + link har page par (header sponsor strip). Dev-tools, hosting, payment, CA services — perfect audience of founders.</div>
+<div class="metrics"><div class="metric"><div class="k">Price</div><div class="v rev">₹15,000/mo</div></div><div class="metric"><div class="k">or</div><div class="v">$200/mo</div></div></div></div>
+<div class="card"><div class="top"><h3>⭐ Featured listing</h3></div>
+<div class="desc">Aapka startup 3D slider + homepage par 30 din tak featured, "Featured" badge ke saath.</div>
+<div class="metrics"><div class="metric"><div class="k">One-time</div><div class="v rev">₹3,000</div></div><div class="metric"><div class="k">or</div><div class="v">$40</div></div></div></div>
+<div class="card"><div class="top"><h3>✅ Verified badge fast-track</h3></div>
+<div class="desc">Revenue proof review 48 ghante me priority ke saath — badge + profile page turant.</div>
+<div class="metrics"><div class="metric"><div class="k">One-time</div><div class="v rev">₹1,500</div></div><div class="metric"><div class="k">or</div><div class="v">$20</div></div></div></div>
+<div class="card"><div class="top"><h3>💰 Startup becho</h3><span class="badge b-ver">FREE LISTING</span></div>
+<div class="desc">Listing bilkul free. Deal close hone par sirf 3% success fee — koi upfront cost nahi.</div>
+<div class="metrics"><div class="metric"><div class="k">Upfront</div><div class="v rev">₹0</div></div><div class="metric"><div class="k">On sale</div><div class="v">3%</div></div></div></div>
+</div>
+<h2 class="sec">💳 Payment methods</h2>
+<div class="prose">
+<p>{pay_html}</p>
+{qr_html}
+<p style="color:var(--muted);font-size:13px">Payment ke baad apni receipt + listing details submit form se bhejein — 24 ghante me live. International invoices (USD, wire/PayPal) available on request.</p>
+</div>
+"""
+page("pricing.html", f"Sponsor & Featured Pricing — {NAME}", "Sponsor HonestMRR: homepage sponsor slots, featured listings and verified badge fast-track. Pay via UPI, Razorpay, PayPal or Wise.", pricing)
+
+
+# ---------- legal pages ----------
+privacy = f"""
+<div class="hero" style="padding:40px 0 10px"><h1 style="font-size:32px">Privacy Policy</h1>
+<p>Last updated: {date.today().strftime('%d %B %Y')}</p></div>
+<div class="prose">
+<h2>What we collect</h2>
+<p>{ESC(NAME)} is a static informational website. We do not use tracking cookies and do not require accounts. If you submit your startup for listing (via our submission form), we collect only the details you provide: startup name, website, category, description, revenue figures and your contact handle, solely for the purpose of publishing and verifying your listing.</p>
+<h2>Payments</h2>
+<p>All payments (UPI, card, PayPal, Wise) are processed by regulated third-party payment providers. {ESC(NAME)} never sees or stores card numbers, bank credentials or UPI PINs.</p>
+<h2>Data published</h2>
+<p>Revenue figures are published only from public filings/press reports or with the founder's explicit submission. Founders may request correction or removal of their listing at any time by contacting the operator.</p>
+<h2>Operator</h2>
+<p>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}.{f" Email: {ESC(CFG['contact_email'])}" if CFG.get('contact_email') else ""}</p>
+</div>
+"""
+page("privacy.html", f"Privacy Policy — {NAME}", f"How {NAME} handles data: no tracking cookies, founder-submitted listings, third-party payment processing.", privacy)
+
+terms = f"""
+<div class="hero" style="padding:40px 0 10px"><h1 style="font-size:32px">Terms of Service</h1>
+<p>Last updated: {date.today().strftime('%d %B %Y')}</p></div>
+<div class="prose">
+<h2>1. About the service</h2>
+<p>{ESC(NAME)} publishes approximate revenue data for startups from public sources and founder submissions, and provides a platform where startups may be listed for acquisition. Data is provided for informational purposes only and is not investment, legal or tax advice.</p>
+<h2>2. Listings</h2>
+<p>Founders submitting listings warrant that the information provided is accurate and that they have the right to share it. We may verify, edit, badge or remove any listing at our discretion. Paid featured placements are clearly marked and do not alter verified revenue figures.</p>
+<h2>3. Advertising & sponsorship</h2>
+<p>Sponsor slots are sold on a monthly basis. Sponsored content is labelled. Sponsors are responsible for the legality of their own products and claims.</p>
+<h2>4. Marketplace</h2>
+<p>Acquisition transactions are concluded directly between buyer and seller. {ESC(NAME)} acts only as a listing platform and charges a success fee where stated. We are not a party to any acquisition agreement.</p>
+<h2>5. Liability</h2>
+<p>Figures are approximate and sourced in good faith; we accept no liability for decisions taken on the basis of published data. Operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}, governed by the laws of India.</p>
+</div>
+"""
+page("terms.html", f"Terms of Service — {NAME}", f"Terms of use for {NAME}: listings, sponsorship, marketplace and liability.", terms)
+
 # ---------- sitemap / robots ----------
-urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html"] + [f"startup/{r['slug']}.html" for r in rows]
+urls = ["index.html", "browse.html", "stats.html", "submit.html", "about.html", "pricing.html", "privacy.html", "terms.html"] + [f"startup/{r['slug']}.html" for r in rows]
 if SITE_URL:
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sm += "".join(f"  <url><loc>{SITE_URL}/{u}</loc></url>\n" for u in urls)
@@ -498,5 +595,11 @@ with open(os.path.join(OUT, "assets", "slider.js"), "w") as f:
   layout();restart();
 })();
 """)
+
+# Google Search Console verification files (data/google*.html) site root par copy karo
+import shutil as _sh
+for _f in os.listdir(DATA):
+    if _f.startswith("google") and _f.endswith(".html"):
+        _sh.copy(os.path.join(DATA, _f), os.path.join(OUT, _f))
 
 print(f"Built {len(urls)} pages into {OUT}")
