@@ -1,0 +1,47 @@
+name: Build & Deploy Site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Roz subah 7:30 IST (2:00 UTC) site auto-update hoti hai
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Agar repo Settings > Variables me SHEET_CSV_URL set hai,
+      # to Google Sheet ka published CSV download karke data/startups.csv replace ho jata hai
+      - name: Sync data from Google Sheet
+        run: |
+          if [ -n "${{ vars.SHEET_CSV_URL }}" ]; then
+            curl -sfL "${{ vars.SHEET_CSV_URL }}" -o /tmp/sheet.csv && \
+            head -1 /tmp/sheet.csv | grep -q "name" && \
+            cp /tmp/sheet.csv data/startups.csv && \
+            echo "✅ Data synced from Google Sheet" || \
+            echo "⚠️ Sheet fetch failed, using existing CSV"
+          else
+            echo "SHEET_CSV_URL not set, using existing CSV"
+          fi
+
+      - name: Build site
+        run: python3 build.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+      - uses: actions/deploy-pages@v4
