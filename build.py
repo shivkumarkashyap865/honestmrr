@@ -481,7 +481,7 @@ about = f"""
 <h2>For buyers & sellers</h2>
 <p>The Buy/Sell section lists profitable startups for acquisition. Sellers get exposure to thousands of visitors; buyers get numbers they can trust. {len(for_sale)} startups currently listed.</p>
 <h2>Operator</h2>
-<p>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))}, a sole proprietor based in {ESC(CFG.get('owner_location',''))}. The business sells advertising and sponsorship placements on this website along with featured-listing services.</p>
+<p>{ESC(NAME)} is owned and operated by {ESC(CFG.get('owner_name',''))}, trading as HonestMRR Studio, {ESC(CFG.get('owner_location',''))}. The business sells advertising and sponsorship placements on this website along with featured-listing services.</p>
 <h2>Contact</h2>
 <p>{('Email: ' + ESC(CFG['contact_email'])) if CFG.get('contact_email') else 'Contact details coming soon. Follow us on X.'}</p>
 </div>
@@ -617,7 +617,7 @@ terms = f"""
 <h2>4. Marketplace</h2>
 <p>Acquisition transactions are concluded directly between buyer and seller. {ESC(NAME)} acts only as a listing platform and charges a success fee where stated. We are not a party to any acquisition agreement.</p>
 <h2>5. Liability</h2>
-<p>Figures are approximate and sourced in good faith; we accept no liability for decisions taken on the basis of published data. Operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}, governed by the laws of India.</p>
+<p>Figures are approximate and sourced in good faith; we accept no liability for decisions taken on the basis of published data. Operated by {ESC(CFG.get('owner_name',''))}, trading as HonestMRR Studio, {ESC(CFG.get('owner_location',''))}, governed by the laws of India.</p>
 </div>
 """
 page("terms.html", f"Terms of Service — {NAME}", f"Terms of use for {NAME}: listings, sponsorship, marketplace and liability.", terms)
