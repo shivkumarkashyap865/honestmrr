@@ -17,7 +17,10 @@
     });
   }
   function go(d){active=(active+d+n)%n;layout();}
-  function restart(){if(timer)clearInterval(timer);timer=setInterval(function(){go(1);},3800);}
+  var vis=true,rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function restart(){if(timer)clearInterval(timer);if(rm)return;timer=setInterval(function(){if(vis&&!document.hidden)go(1);},3800);}
+if('IntersectionObserver' in window){new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(!vis){if(timer){clearInterval(timer);timer=null;}}else restart();}).observe(stage);}
+document.addEventListener('visibilitychange',function(){if(document.hidden){if(timer){clearInterval(timer);timer=null;}}else if(vis)restart();});
   document.getElementById('s3prev').addEventListener('click',function(){go(-1);restart();});
   document.getElementById('s3next').addEventListener('click',function(){go(1);restart();});
   var sx=null;

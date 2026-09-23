@@ -154,6 +154,8 @@ tr:hover td{background:rgba(255,255,255,.04)}
 .fform summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:700}
 .fform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:640px){.fform .row2{grid-template-columns:1fr}}
+@media(max-width:640px){*{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
 .filters input,.filters select{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:10px 12px;border-radius:14px;font-size:14px}
 .filters input{flex:1;min-width:200px}
@@ -703,7 +705,10 @@ with open(os.path.join(OUT, "assets", "slider.js"), "w") as f:
     });
   }
   function go(d){active=(active+d+n)%n;layout();}
-  function restart(){if(timer)clearInterval(timer);timer=setInterval(function(){go(1);},3800);}
+  var vis=true,rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function restart(){if(timer)clearInterval(timer);if(rm)return;timer=setInterval(function(){if(vis&&!document.hidden)go(1);},3800);}
+if('IntersectionObserver' in window){new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(!vis){if(timer){clearInterval(timer);timer=null;}}else restart();}).observe(stage);}
+document.addEventListener('visibilitychange',function(){if(document.hidden){if(timer){clearInterval(timer);timer=null;}}else if(vis)restart();});
   document.getElementById('s3prev').addEventListener('click',function(){go(-1);restart();});
   document.getElementById('s3next').addEventListener('click',function(){go(1);restart();});
   var sx=null;
