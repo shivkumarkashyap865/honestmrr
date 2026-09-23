@@ -226,7 +226,7 @@ def page(path, title, desc, body, canonical=None):
 {body}
 </main>
 <footer><div class="wrap">
-<div>© {date.today().year} {ESC(NAME)} — The database of honest startup revenues.<br/>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}.{f" Contact: {ESC(CFG['contact_email'])}" if CFG.get('contact_email') else ""}</div>
+<div>© {date.today().year} {ESC(NAME)} — The database of honest startup revenues.<br/>An independent startup revenue research platform.{f" <a href='mailto:{ESC(CFG['contact_email'])}'>Contact us</a>" if CFG.get('contact_email') else ""}</div>
 <div><a href="{'../' if path.count('/') else ''}privacy.html">Privacy Policy</a> · <a href="{'../' if path.count('/') else ''}terms.html">Terms of Service</a></div>
 <div>Revenue figures are approximate & from public reports unless marked verified. Not investment advice.</div>
 </div></footer>
@@ -561,17 +561,17 @@ if upi:
 pricing = f"""
 <div class="hero" style="padding:40px 0 10px">
 <h1 style="font-size:32px">Sponsor & get featured</h1>
-<p>Support the open startup database — aur hazards of verified-revenue visitors ke saamne apna product ya startup rakho.</p>
+<p>Support the open startup database — and put your product in front of a growing audience of verified-revenue visitors.</p>
 </div>
 <div class="cards">
 <div class="card"><div class="top"><h3>🏠 Homepage sponsor slot</h3><span class="badge b-sale">BEST VALUE</span></div>
-<div class="desc">Logo + link har page par (header sponsor strip). Dev-tools, hosting, payment, CA services — perfect audience of founders.</div>
+<div class="desc">Your logo + link on every page (header sponsor strip). Dev tools, hosting, payments, CA services — a perfect founder audience.</div>
 <div class="metrics"><div class="metric"><div class="k">Price</div><div class="v rev">₹15,000/mo</div></div><div class="metric"><div class="k">or</div><div class="v">$200/mo</div></div></div></div>
 <div class="card"><div class="top"><h3>⭐ Featured listing</h3></div>
-<div class="desc">Aapka startup 3D slider + homepage par 30 din tak featured, "Featured" badge ke saath.</div>
+<div class="desc">Your startup featured on the 3D slider + homepage for 30 days, with a "Featured" badge.</div>
 <div class="metrics"><div class="metric"><div class="k">One-time</div><div class="v rev">₹3,000</div></div><div class="metric"><div class="k">or</div><div class="v">$40</div></div></div></div>
 <div class="card"><div class="top"><h3>✅ Verified badge fast-track</h3></div>
-<div class="desc">Revenue proof review 48 ghante me priority ke saath — badge + profile page turant.</div>
+<div class="desc">Priority revenue-proof review within 48 hours — badge + profile page immediately.</div>
 <div class="metrics"><div class="metric"><div class="k">One-time</div><div class="v rev">₹1,500</div></div><div class="metric"><div class="k">or</div><div class="v">$20</div></div></div></div>
 <div class="card"><div class="top"><h3>💰 Startup becho</h3><span class="badge b-ver">FREE LISTING</span></div>
 <div class="desc">Listing is completely free. Only a 3% success fee when your deal closes — no upfront cost.</div>
@@ -581,7 +581,7 @@ pricing = f"""
 <div class="prose">
 <p>{pay_html}</p>
 {qr_html}
-<p style="color:var(--muted);font-size:13px">Payment ke baad apni receipt + listing details submit form se bhejein — 24 ghante me live. International invoices (USD, wire/PayPal) available on request.</p>
+<p style="color:var(--muted);font-size:13px">After payment, send your receipt + listing details via the submit form — live within 24 hours. International invoices (USD, wire/PayPal) available on request.</p>
 </div>
 """
 page("pricing.html", f"Sponsor & Featured Pricing — {NAME}", "Sponsor HonestMRR: homepage sponsor slots, featured listings and verified badge fast-track. Pay via UPI, Razorpay, PayPal or Wise.", pricing)
@@ -599,7 +599,7 @@ privacy = f"""
 <h2>Data published</h2>
 <p>Revenue figures are published only from public filings/press reports or with the founder's explicit submission. Founders may request correction or removal of their listing at any time by contacting the operator.</p>
 <h2>Operator</h2>
-<p>{ESC(NAME)} is operated by {ESC(CFG.get('owner_name',''))} (sole proprietor), {ESC(CFG.get('owner_location',''))}.{f" Email: {ESC(CFG['contact_email'])}" if CFG.get('contact_email') else ""}</p>
+<p>{ESC(NAME)} is owned and operated by {ESC(CFG.get('owner_name',''))}, trading as HonestMRR Studio, {ESC(CFG.get('owner_location',''))}.{f" Email: {ESC(CFG['contact_email'])}" if CFG.get('contact_email') else ""}</p>
 </div>
 """
 page("privacy.html", f"Privacy Policy — {NAME}", f"How {NAME} handles data: no tracking cookies, founder-submitted listings, third-party payment processing.", privacy)
@@ -626,35 +626,35 @@ page("terms.html", f"Terms of Service — {NAME}", f"Terms of use for {NAME}: li
 # ---------- services page ----------
 services = f"""
 <div class="hero" style="padding:40px 0 10px">
-<h1 style="font-size:32px">Hire the founder: AI agents, websites & chatbots</h1>
-<p>This entire site — glassmorphism UI, 3D slider, auto-updating data pipeline, SEO — was built solo by Shivkumar Mallah. <strong>HonestMRR is itself the portfolio.</strong> Same quality, for your business.</p>
+<h1 style="font-size:32px">AI agents, websites & chatbots — built by the studio behind HonestMRR</h1>
+<p>This entire site — glassmorphism UI, 3D slider, auto-updating data pipeline, SEO — was designed and engineered by our studio. <strong>HonestMRR is itself the portfolio.</strong> The same standard of quality, applied to your business.</p>
 </div>
 <div class="cards">
 <div class="card"><div class="top"><h3>🤖 AI Chatbot</h3><span class="badge b-ver">7-DAY DELIVERY</span></div>
-<div class="desc">WhatsApp + website chatbot jo aapke customers ke sawaalon ke jawab khud deta hai — lead capture, booking, support. Trained on your business data.</div>
+<div class="desc">A WhatsApp + website chatbot that answers your customers' questions on its own — lead capture, booking, support. Trained on your business data.</div>
 <div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹15,000</div></div></div></div>
 <div class="card"><div class="top"><h3>🌐 Business Website</h3><span class="badge b-ver">7-DAY DELIVERY</span></div>
-<div class="desc">Modern, fast, mobile-first website (isi site jaisi glassmorphism design). SEO-ready, payment buttons ke saath. Hosting setup included.</div>
+<div class="desc">A modern, fast, mobile-first website (the same glassmorphism design as this site). SEO-ready, with payment buttons. Hosting setup included.</div>
 <div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹20,000</div></div></div></div>
 <div class="card"><div class="top"><h3>🧠 AI Agents & Automation</h3></div>
-<div class="desc">Custom AI agents: lead generation, email automation, data extraction, internal ops. Jo ghanton ka kaam hai wo minutes me.</div>
+<div class="desc">Custom AI agents: lead generation, email automation, data extraction, internal ops. Work that takes hours, done in minutes.</div>
 <div class="metrics"><div class="metric"><div class="k">Starts at</div><div class="v rev">₹35,000</div></div></div></div>
 <div class="card"><div class="top"><h3>🔧 Maintenance + SEO</h3></div>
-<div class="desc">Monthly care: updates, backups, speed, search-console monitoring, content tweaks. Aapki site hamesha zinda aur rank karti rahe.</div>
+<div class="desc">Monthly care: updates, backups, speed, search-console monitoring, content tweaks. Your site stays live, fast and ranking.</div>
 <div class="metrics"><div class="metric"><div class="k">Monthly</div><div class="v rev">₹5,000</div></div></div></div>
 </div>
-<h2 class="sec">Kaise kaam hota hai</h2>
+<h2 class="sec">How we work</h2>
 <div class="prose">
 <ol>
 <li><strong>DM / email</strong> us: {f'{ESC(CFG["contact_email"])}' if CFG.get('contact_email') else 'contact us via the About page'} — describe your requirement (10-min call)</li>
-<li><strong>Fixed quote</strong> milta hai 24 ghante me — koi hidden charge nahi</li>
-<li><strong>50% advance</strong> (UPI: {ESC(CFG.get('upi_id','')) or 'on request'}) → kaam shuru</li>
-<li><strong>Delivery + 50%</strong> — 7-14 din me live. 15 din ka free support saath me.</li>
+<li><strong>Fixed quote</strong> within 24 hours — no hidden charges</li>
+<li><strong>50% advance</strong> (UPI: {ESC(CFG.get('upi_id','')) or 'on request'}) → work begins</li>
+<li><strong>Delivery + 50%</strong> — live in 7–14 days. Includes 15 days of free support.</li>
 </ol>
-<p style="color:var(--muted);font-size:13px">International clients: USD invoices via Wise/PayPal, purpose code P1007. Portfolio = yahi website + HonestMRR data pipeline.</p>
+<p style="color:var(--muted);font-size:13px">International clients: USD invoices via Wise/PayPal, purpose code P1007. Our portfolio: this website + the HonestMRR data pipeline.</p>
 </div>
 """
-page("services.html", f"AI Agents, Websites & Chatbots by Shivkumar — {NAME}", "Hire the founder of HonestMRR: AI chatbots, modern business websites, AI agents and automation. 7-day delivery, fixed pricing, UPI or Wise.", services)
+page("services.html", f"AI Agents, Websites & Chatbots — {NAME} Studio", "HonestMRR Studio builds AI chatbots, modern business websites, AI agents and automation. 7-day delivery, fixed pricing, UPI or Wise.", services)
 
 
 # ---------- thanks page ----------
