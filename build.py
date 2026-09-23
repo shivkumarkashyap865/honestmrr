@@ -461,6 +461,7 @@ submit = f"""
 </div>
 """
 page("submit.html", f"Add your startup — {NAME}", "Submit your Indian startup's revenue for verification and get listed on the leaderboard free.", submit)
+page("join.html", f"Add your startup — {NAME}", "Submit your Indian startup's revenue for verification and get listed on the leaderboard free.", submit, canonical=SITE_URL + "/submit.html")
 
 # ---------- about ----------
 about = f"""
