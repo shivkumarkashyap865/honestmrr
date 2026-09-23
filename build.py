@@ -409,7 +409,7 @@ submit = f"""
 <h1 style="font-size:32px">Add your startup</h1>
 <p>Get listed free. Verified startups get a badge, more traffic, and priority placement in the buy/sell marketplace.</p>
 <form class="fform prose" id="subform" style="margin-top:20px" action="#" method="POST">
-<noscript><p style="color:var(--accent);font-size:13px">JavaScript off hai? Seedha email karein: honestmrr.official@gmail.com</p></noscript>
+<noscript><p style="color:var(--accent);font-size:13px">JavaScript disabled? Email us directly: honestmrr.official@gmail.com</p></noscript>
 <label>Startup name *</label><input name="Startup name" required placeholder="Example: DemoApp"/>
 <label>Website *</label><input name="Website" required placeholder="https://..."/>
 <div class="row2">
@@ -417,7 +417,7 @@ submit = f"""
 <div><label>Founder email *</label><input name="Founder email" type="email" required placeholder="you@email.com"/></div>
 </div>
 <label>Revenue proof link * (Drive/Dropbox screenshot link)</label><input name="Revenue proof link" required placeholder="https://drive.google.com/..."/>
-<details><summary>+ Optional details (bharo to profile strong hogi)</summary>
+<details><summary>+ Optional details (makes your profile stronger)</summary>
 <div class="row2" style="margin-top:12px">
 <div><label>City</label><input name="City" placeholder="Indore"/></div>
 <div><label>Growth % (30 days)</label><input name="Growth pct" type="number" placeholder="12"/></div>
@@ -432,15 +432,15 @@ submit = f"""
 </details>
 <button class="btn btn-primary" type="submit" style="margin-top:6px">Submit for review →</button>
 <div id="mailfall" style="display:none;margin-top:16px;padding:16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--stroke)">
-<p style="font-size:14px;margin:0 0 10px">📬 <strong>Aapka email app khul gaya hoga — wahan SEND dabayein.</strong><br/>Agar nahi khula to ye karo:</p>
+<p style="font-size:14px;margin:0 0 10px">📬 <strong>Your email app should now be open — tap SEND there.</strong><br/>If it didn't open, use these options:</p>
 <textarea id="mailbody" readonly style="width:100%;min-height:130px;background:rgba(0,0,0,.3);color:var(--text);border:1px solid var(--stroke);border-radius:10px;padding:10px;font-size:12px;font-family:inherit"></textarea>
 <p style="margin:10px 0 0;display:flex;gap:8px;flex-wrap:wrap">
 <button type="button" class="btn" id="cpmail" style="padding:8px 14px;font-size:12px">📋 Copy content</button>
-<a class="btn" style="padding:8px 14px;font-size:12px" href="mailto:honestmrr.official@gmail.com">✉️ Email app kholen</a>
-<a class="btn btn-primary" style="padding:8px 14px;font-size:12px" href="thanks.html">✅ Maine send kar diya</a></p>
+<a class="btn" style="padding:8px 14px;font-size:12px" href="mailto:honestmrr.official@gmail.com">✉️ Open email app</a>
+<a class="btn btn-primary" style="padding:8px 14px;font-size:12px" href="thanks.html">✅ I've sent it</a></p>
 </div>
 {SUBMIT_JS}
-<p style="color:var(--muted);font-size:12px;margin-top:10px">Review within 7 days. Proof bhejne walon ko ✅ Founder Verified badge milta hai. <a href="pricing.html">⭐ Get featured</a></p>
+<p style="color:var(--muted);font-size:12px;margin-top:10px">Review within 7 days. Valid revenue proof earns the ✅ Founder Verified badge. <a href="pricing.html">⭐ Get featured</a></p>
 </form>
 </div>
 <div class="prose">
@@ -553,7 +553,7 @@ qr_html = ""
 if upi:
     qr_html = f"""<div style="text-align:center;margin:18px 0">
 <canvas id="upiqr" style="border-radius:16px;background:#fff;padding:12px"></canvas>
-<div class="cat" style="margin-top:8px">UPI ID: <strong>{ESC(upi)}</strong> (scan karein ya copy karein)</div>
+<div class="cat" style="margin-top:8px">UPI ID: <strong>{ESC(upi)}</strong> (scan or copy)</div>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>if(window.QRious){{new QRious({{element:document.getElementById('upiqr'),value:'upi://pay?pa={ESC(upi)}&pn={ESC(NAME)}&cu=INR',size:190,background:'#ffffff',foreground:'#1a120b'}});}}</script>
 </div>"""
@@ -574,7 +574,7 @@ pricing = f"""
 <div class="desc">Revenue proof review 48 ghante me priority ke saath — badge + profile page turant.</div>
 <div class="metrics"><div class="metric"><div class="k">One-time</div><div class="v rev">₹1,500</div></div><div class="metric"><div class="k">or</div><div class="v">$20</div></div></div></div>
 <div class="card"><div class="top"><h3>💰 Startup becho</h3><span class="badge b-ver">FREE LISTING</span></div>
-<div class="desc">Listing bilkul free. Deal close hone par sirf 3% success fee — koi upfront cost nahi.</div>
+<div class="desc">Listing is completely free. Only a 3% success fee when your deal closes — no upfront cost.</div>
 <div class="metrics"><div class="metric"><div class="k">Upfront</div><div class="v rev">₹0</div></div><div class="metric"><div class="k">On sale</div><div class="v">3%</div></div></div></div>
 </div>
 <h2 class="sec">💳 Payment methods</h2>
@@ -646,7 +646,7 @@ services = f"""
 <h2 class="sec">Kaise kaam hota hai</h2>
 <div class="prose">
 <ol>
-<li><strong>DM / email</strong> karo: {f'{ESC(CFG["contact_email"])}' if CFG.get('contact_email') else 'site ke About page se contact karo'} — requirement batao (10 min call)</li>
+<li><strong>DM / email</strong> us: {f'{ESC(CFG["contact_email"])}' if CFG.get('contact_email') else 'contact us via the About page'} — describe your requirement (10-min call)</li>
 <li><strong>Fixed quote</strong> milta hai 24 ghante me — koi hidden charge nahi</li>
 <li><strong>50% advance</strong> (UPI: {ESC(CFG.get('upi_id','')) or 'on request'}) → kaam shuru</li>
 <li><strong>Delivery + 50%</strong> — 7-14 din me live. 15 din ka free support saath me.</li>
@@ -661,8 +661,8 @@ page("services.html", f"AI Agents, Websites & Chatbots by Shivkumar — {NAME}",
 thanks = f"""
 <div class="hero" style="padding:60px 0 30px">
 <h1 style="font-size:32px">🎉 Submission received!</h1>
-<p>Shukriya! Aapki listing review queue me hai — <strong>7 din ke andar</strong> email par jawab aayega. Revenue proof valid hua to ✅ Founder Verified badge ke saath live ho jayegi.</p>
-<div class="cta" style="margin-top:20px"><a class="btn btn-primary" href="index.html">Leaderboard dekhein</a><a class="btn" href="browse.html">Marketplace browse karein</a></div>
+<p>Thank you! Your listing is in the review queue — expect an email response within <strong>7 days</strong>. Once your revenue proof validates, your startup goes live with the ✅ Founder Verified badge.</p>
+<div class="cta" style="margin-top:20px"><a class="btn btn-primary" href="index.html">View the leaderboard</a><a class="btn" href="browse.html">Browse the marketplace</a></div>
 </div>
 """
 page("thanks.html", f"Submission received — {NAME}", "Thank you for submitting your startup to HonestMRR. Review within 7 days.", thanks)
