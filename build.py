@@ -382,11 +382,34 @@ page("stats.html", f"Stats — SaaS Revenue Benchmarks — {NAME}", "Revenue ben
 
 # ---------- submit ----------
 form_url = CFG.get("submit_form_url") or "#"
+SUBMIT_JS = r"""<script>
+(function(){
+var f=document.getElementById('subform');if(!f)return;
+var panel=document.getElementById('mailfall'),ta=document.getElementById('mailbody');
+f.addEventListener('submit',function(e){
+e.preventDefault();
+var d=new FormData(f),lines=[];
+d.forEach(function(v,k){if(k.charAt(0)!=='_'&&String(v).trim()!=='')lines.push(k+': '+v);});
+var body=lines.join('\n');
+var name=String(d.get('Startup name')||'My startup');
+try{fetch(f.action,{method:'POST',body:new URLSearchParams(d),mode:'no-cors'}).catch(function(){});}catch(err){}
+ta.value='To: honestmrr.official@gmail.com\nSubject: New startup submission — '+name+'\n\n'+body;
+panel.style.display='block';
+location.href='mailto:honestmrr.official@gmail.com?subject='+encodeURIComponent('New startup submission — '+name)+'&body='+encodeURIComponent(body);
+setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'center'});},400);
+});
+document.getElementById('cpmail').addEventListener('click',function(){
+ta.select();ta.setSelectionRange(0,99999);
+try{navigator.clipboard.writeText(ta.value);}catch(err){document.execCommand('copy');}
+this.textContent='✅ Copied!';
+});
+})();
+</script>"""
 submit = f"""
 <div class="hero" style="padding:40px 0 10px">
 <h1 style="font-size:32px">Add your startup</h1>
 <p>Get listed free. Verified startups get a badge, more traffic, and priority placement in the buy/sell marketplace.</p>
-<form class="fform prose" style="margin-top:20px" action="https://formsubmit.co/{ESC(CFG.get('contact_email',''))}" method="POST">
+<form class="fform prose" id="subform" style="margin-top:20px" action="https://formsubmit.co/{ESC(CFG.get('contact_email',''))}" method="POST">
 <input type="hidden" name="_subject" value="New startup submission — HonestMRR"/>
 <input type="hidden" name="_captcha" value="false"/>
 <input type="hidden" name="_template" value="table"/>
@@ -412,6 +435,15 @@ submit = f"""
 <label>X / Twitter handle</label><input name="X handle" placeholder="@..."/>
 </details>
 <button class="btn btn-primary" type="submit" style="margin-top:6px">Submit for review →</button>
+<div id="mailfall" style="display:none;margin-top:16px;padding:16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--stroke)">
+<p style="font-size:14px;margin:0 0 10px">📬 <strong>Aapka email app khul gaya hoga — wahan SEND dabayein.</strong><br/>Agar nahi khula to ye karo:</p>
+<textarea id="mailbody" readonly style="width:100%;min-height:130px;background:rgba(0,0,0,.3);color:var(--text);border:1px solid var(--stroke);border-radius:10px;padding:10px;font-size:12px;font-family:inherit"></textarea>
+<p style="margin:10px 0 0;display:flex;gap:8px;flex-wrap:wrap">
+<button type="button" class="btn" id="cpmail" style="padding:8px 14px;font-size:12px">📋 Copy content</button>
+<a class="btn" style="padding:8px 14px;font-size:12px" href="mailto:honestmrr.official@gmail.com">✉️ Email app kholen</a>
+<a class="btn btn-primary" style="padding:8px 14px;font-size:12px" href="thanks.html">✅ Maine send kar diya</a></p>
+</div>
+{SUBMIT_JS}
 <p style="color:var(--muted);font-size:12px;margin-top:10px">Review within 7 days. Proof bhejne walon ko ✅ Founder Verified badge milta hai. <a href="pricing.html">⭐ Get featured</a></p>
 </form>
 </div>
