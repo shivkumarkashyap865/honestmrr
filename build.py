@@ -291,7 +291,7 @@ home = f"""
 <h2 class="sec">✨ Featured startups</h2>
 <div class="s3d-wrap"><div class="s3d" id="s3d">{slider_cards}</div></div>
 <div class="s3d-nav"><button id="s3prev" aria-label="Previous">‹</button><button id="s3next" aria-label="Next">›</button></div>
-<script src="assets/slider.js"></script>
+<script src="assets/slider.js" defer></script>
 <h2 class="sec">🏆 Revenue Leaderboard</h2>
 <div class="table-scroll"><table>
 <thead><tr><th>#</th><th>Startup</th><th>Category</th><th>Revenue</th><th>Growth</th><th>Verification</th></tr></thead>
