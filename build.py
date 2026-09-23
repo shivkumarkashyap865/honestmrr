@@ -150,6 +150,8 @@ tr:hover td{background:rgba(255,255,255,.04)}
 .fform input,.fform select,.fform textarea{width:100%;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:11px 13px;border-radius:12px;font-size:14px;font-family:inherit}
 .fform textarea{min-height:90px;resize:vertical}
 .fform input:focus,.fform select:focus,.fform textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.15)}
+.fform details{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:12px 14px}
+.fform summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:700}
 .fform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:640px){.fform .row2{grid-template-columns:1fr}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
@@ -388,25 +390,25 @@ submit = f"""
 <input type="hidden" name="_template" value="table"/>
 <input type="hidden" name="_next" value="{SITE_URL}/thanks.html"/>
 <label>Startup name *</label><input name="Startup name" required placeholder="Example: DemoApp"/>
-<div class="row2">
-<div><label>Website *</label><input name="Website" required placeholder="https://..."/></div>
-<div><label>City</label><input name="City" placeholder="Indore"/></div>
-</div>
-<label>Category *</label><select name="Category" required><option value="">Choose...</option><option>SaaS</option><option>Fintech</option><option>Marketing</option><option>Developer Tools</option><option>Artificial Intelligence</option><option>E-commerce</option><option>Health & Fitness</option><option>Social Media</option><option>Productivity</option><option>Customer Support</option><option>Other</option></select>
-<label>One-line description *</label><textarea name="Description" required placeholder="What does your startup do?"></textarea>
+<label>Website *</label><input name="Website" required placeholder="https://..."/>
 <div class="row2">
 <div><label>Monthly revenue (USD) *</label><input name="Monthly revenue USD" type="number" required placeholder="2500"/></div>
+<div><label>Founder email *</label><input name="Founder email" type="email" required placeholder="you@email.com"/></div>
+</div>
+<label>Revenue proof link * (Drive/Dropbox screenshot link)</label><input name="Revenue proof link" required placeholder="https://drive.google.com/..."/>
+<details><summary>+ Optional details (bharo to profile strong hogi)</summary>
+<div class="row2" style="margin-top:12px">
+<div><label>City</label><input name="City" placeholder="Indore"/></div>
 <div><label>Growth % (30 days)</label><input name="Growth pct" type="number" placeholder="12"/></div>
 </div>
+<label>Category</label><select name="Category"><option value="">Choose...</option><option>SaaS</option><option>Fintech</option><option>Marketing</option><option>Developer Tools</option><option>Artificial Intelligence</option><option>E-commerce</option><option>Health & Fitness</option><option>Social Media</option><option>Productivity</option><option>Customer Support</option><option>Other</option></select>
+<label>One-line description</label><textarea name="Description" placeholder="What does your startup do?"></textarea>
 <div class="row2">
 <div><label>For sale?</label><select name="For sale"><option>No</option><option>Yes</option></select></div>
 <div><label>Asking price (USD)</label><input name="Asking price USD" type="number" placeholder="30000"/></div>
 </div>
-<label>Revenue proof link * (Google Drive/Dropbox screenshot link)</label><input name="Revenue proof link" required placeholder="https://drive.google.com/..."/>
-<div class="row2">
-<div><label>Founder email *</label><input name="Founder email" type="email" required placeholder="you@email.com"/></div>
-<div><label>X / Twitter handle</label><input name="X handle" placeholder="@..."/></div>
-</div>
+<label>X / Twitter handle</label><input name="X handle" placeholder="@..."/>
+</details>
 <button class="btn btn-primary" type="submit" style="margin-top:6px">Submit for review →</button>
 <p style="color:var(--muted);font-size:12px;margin-top:10px">Review within 7 days. Proof bhejne walon ko ✅ Founder Verified badge milta hai. <a href="pricing.html">⭐ Get featured</a></p>
 </form>

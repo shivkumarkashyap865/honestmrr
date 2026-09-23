@@ -58,6 +58,8 @@ tr:hover td{background:rgba(255,255,255,.04)}
 .fform input,.fform select,.fform textarea{width:100%;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--stroke);color:var(--text);padding:11px 13px;border-radius:12px;font-size:14px;font-family:inherit}
 .fform textarea{min-height:90px;resize:vertical}
 .fform input:focus,.fform select:focus,.fform textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.15)}
+.fform details{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:12px 14px}
+.fform summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:700}
 .fform .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:640px){.fform .row2{grid-template-columns:1fr}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
