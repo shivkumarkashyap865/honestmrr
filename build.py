@@ -392,7 +392,6 @@ var d=new FormData(f),lines=[];
 d.forEach(function(v,k){if(k.charAt(0)!=='_'&&String(v).trim()!=='')lines.push(k+': '+v);});
 var body=lines.join('\n');
 var name=String(d.get('Startup name')||'My startup');
-try{fetch(f.action,{method:'POST',body:new URLSearchParams(d),mode:'no-cors'}).catch(function(){});}catch(err){}
 ta.value='To: honestmrr.official@gmail.com\nSubject: New startup submission — '+name+'\n\n'+body;
 panel.style.display='block';
 location.href='mailto:honestmrr.official@gmail.com?subject='+encodeURIComponent('New startup submission — '+name)+'&body='+encodeURIComponent(body);
@@ -409,11 +408,8 @@ submit = f"""
 <div class="hero" style="padding:40px 0 10px">
 <h1 style="font-size:32px">Add your startup</h1>
 <p>Get listed free. Verified startups get a badge, more traffic, and priority placement in the buy/sell marketplace.</p>
-<form class="fform prose" id="subform" style="margin-top:20px" action="https://formsubmit.co/{ESC(CFG.get('contact_email',''))}" method="POST">
-<input type="hidden" name="_subject" value="New startup submission — HonestMRR"/>
-<input type="hidden" name="_captcha" value="false"/>
-<input type="hidden" name="_template" value="table"/>
-<input type="hidden" name="_next" value="{SITE_URL}/thanks.html"/>
+<form class="fform prose" id="subform" style="margin-top:20px" action="#" method="POST">
+<noscript><p style="color:var(--accent);font-size:13px">JavaScript off hai? Seedha email karein: honestmrr.official@gmail.com</p></noscript>
 <label>Startup name *</label><input name="Startup name" required placeholder="Example: DemoApp"/>
 <label>Website *</label><input name="Website" required placeholder="https://..."/>
 <div class="row2">
